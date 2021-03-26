@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View, SafeAreaView, TextInput, Button, StyleSheet } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
 import { useForm, Controller } from 'react-hook-form'
 
 
-export default function Login() {
+export default function Login(props: any) {
     const { control, handleSubmit, errors } = useForm()
     const onSubmit = (event: any) => {
         console.log(event)
@@ -12,9 +12,14 @@ export default function Login() {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.label}>Username</Text>
+                <Text style={styles.title}>
+                    Login
+                </Text>
+            </View>
+            <View>
+                <Text style={styles.label}>Email</Text>
                 <Controller
-                    name="Username"
+                    name="Email"
                     defaultValue=""
                     control={control}
                     rules={{ required: 'This is required.' }}
@@ -48,8 +53,18 @@ export default function Login() {
                     )}
                 />
             </View>
-            <Button color="black" title="Login" onPress={handleSubmit(onSubmit)}></Button>
-
+            <TouchableHighlight style={styles.button} onPress={handleSubmit(onSubmit)}>
+                <Text>
+                    Login
+                </Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.button} onPress={() => {
+                props.navigation.navigate("CreateAccount")
+            }}>
+                <Text>
+                    Create account
+                </Text>
+            </TouchableHighlight>
         </View>
     )
 }
@@ -59,14 +74,16 @@ const styles = StyleSheet.create({
         color: "black",
         margin: 20,
         marginLeft: 10,
+        fontSize: 20,
     },
     button: {
-        marginTop: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#a2b5a0',
+        margin: 10,
+        marginTop: 25,
         borderRadius: 4,
-        backgroundColor: 'black',
-        color: 'black',
-        width: 300,
-        borderColor: 'black'
+        padding: 10,
     },
     container: {
         flex: 1,
@@ -74,10 +91,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     input: {
-        backgroundColor: 'grey',
+        backgroundColor: '#49e9eb',
         height: 40,
         borderRadius: 4,
         padding: 10,
         margin: 10,
     },
+    title: {
+        fontSize: 40,
+        textAlign: 'center'
+    }
 })

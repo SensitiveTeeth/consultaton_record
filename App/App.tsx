@@ -20,6 +20,7 @@ import {
 } from 'react-native';
 import Login from './pages/Login';
 import { NavigationContainer } from '@react-navigation/native';
+import CreateAccount from './pages/CreateAccount';
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -27,12 +28,15 @@ const App = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
-                <Stack.Screen name="Login" component={Login} />
-                {/* <Login /> */}
+            <Stack.Navigator initialRouteName="Login" >
+                <Stack.Screen name="Login" component={Login} options={{
+                    headerShown: false
+                }} />
+                <Stack.Screen name="CreateAccount" component={CreateAccount} />
             </Stack.Navigator>
             <StatusBar barStyle="dark-content" />
             <SafeAreaView>
+
             </SafeAreaView>
         </NavigationContainer>
     );
