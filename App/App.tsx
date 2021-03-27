@@ -14,27 +14,30 @@ import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import CreateAccount from './pages/CreateAccount';
 import Login from './pages/Login';
 import LoadingScreen from './pages/LoadingScreen'
+import Home from './pages/Home';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const Stack = createStackNavigator();
 const App = () => {
     const isDarkMode = useColorScheme() === 'dark';
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="LoadingScreen" >
-                <Stack.Screen name="Login" component={Login} options={{
-                    headerShown: false
-                }} />
-                <Stack.Screen name="CreateAccount" component={CreateAccount} />
-                <Stack.Screen name="LoadingScreen" component={LoadingScreen} options={{
-                    headerShown: false
-                }} />
-            </Stack.Navigator>
-            <StatusBar barStyle="dark-content" />
-            <SafeAreaView>
-
-            </SafeAreaView>
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="LoadingScreen" >
+                    <Stack.Screen name="Login" component={Login} options={{
+                        headerShown: false
+                    }} />
+                    <Stack.Screen name="CreateAccount" component={CreateAccount} />
+                    <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="Loading" component={LoadingScreen} options={{
+                        headerShown: false
+                    }} />
+                </Stack.Navigator>
+                <StatusBar barStyle="dark-content" />
+            </NavigationContainer>
+        </Provider>
     );
 };
 
