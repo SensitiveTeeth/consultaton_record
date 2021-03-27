@@ -7,20 +7,13 @@
  *
  * @format
  */
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
-} from 'react-native';
-import Login from './pages/Login';
-import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import CreateAccount from './pages/CreateAccount';
+import Login from './pages/Login';
+import LoadingScreen from './pages/LoadingScreen'
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -28,11 +21,14 @@ const App = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login" >
+            <Stack.Navigator initialRouteName="LoadingScreen" >
                 <Stack.Screen name="Login" component={Login} options={{
                     headerShown: false
                 }} />
                 <Stack.Screen name="CreateAccount" component={CreateAccount} />
+                <Stack.Screen name="LoadingScreen" component={LoadingScreen} options={{
+                    headerShown: false
+                }} />
             </Stack.Navigator>
             <StatusBar barStyle="dark-content" />
             <SafeAreaView>

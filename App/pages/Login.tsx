@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Text, View, SafeAreaView, TextInput, Button, StyleSheet, TouchableHighlight } from 'react-native';
-import { useForm, Controller } from 'react-hook-form'
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 
 export default function Login(props: any) {
@@ -53,18 +53,18 @@ export default function Login(props: any) {
                     )}
                 />
             </View>
-            <TouchableHighlight style={styles.button} onPress={handleSubmit(onSubmit)}>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
                 <Text>
                     Login
                 </Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={styles.button} onPress={() => {
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => {
                 props.navigation.navigate("CreateAccount")
             }}>
                 <Text>
                     Create account
                 </Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
         </View>
     )
 }

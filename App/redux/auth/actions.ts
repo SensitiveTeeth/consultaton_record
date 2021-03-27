@@ -1,5 +1,6 @@
 import { ThunkDispatch, RootState } from "../../store"
-import { push } from "connected-react-router"
+import config from '../../config'
+import AsyncStorage from "@react-native-community/async-storage"
 
 export interface User {
     id: number;
@@ -38,22 +39,22 @@ export type AuthActions = ReturnType<typeof loginSuccess | typeof loginFailed | 
 //thunk
 export function logout() {
     return async (dispatch: ThunkDispatch, getState: () => RootState) => {
-        localStorage.removeItem('token')
+        await AsyncStorage.removeItem('token')
         dispatch(logoutSuccess())
     };
 }
 
 
-export function login(usercode: string, password: string) {
+export function login(email: string, password: string) {
     return async (dispatch: ThunkDispatch, getState: () => RootState) => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+            const res = await fetch(`${config.BACKEND_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    usercode, password
+                    email, password
                 })
             })
             const json = await res.json();
@@ -63,11 +64,11 @@ export function login(usercode: string, password: string) {
             if (!json.token) {
                 return dispatch(loginFailed('Network error'));
             }
-            const returnPath = (getState().router.location.state as any)?.from
+            // const returnPath = (getState().router.location.state as any)?.from
 
-            localStorage.setItem('token', json.token);
+            await AsyncStorage.setItem('token', json.token);
             dispatch(loginSuccess(json.token, json.user))
-            dispatch(push(returnPath || '/followup'))
+            // dispatch(push(returnPath || '/followup'))
 
         } catch (e) {
             console.error(e);
@@ -81,12 +82,12 @@ export function login(usercode: string, password: string) {
 export function restoreLogin() {
     return async (dispatch: ThunkDispatch, getState: () => RootState) => {
         try {
-            const token = localStorage.getItem('token')
+            const token = await AsyncStorage.getItem('token')
             if (token == null) {
                 dispatch(logout())
                 return;
             }
-            const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user`, {
+            const res = await fetch(`${config.BACKEND_URL}/user`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
