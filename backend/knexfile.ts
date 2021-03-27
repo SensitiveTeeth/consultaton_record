@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
-dotenv.config();
-module.exports = {
+dotenv.config({ path: "./.env" });
 
+module.exports = {
     development: {
         client: 'mysql',
         connection: {
