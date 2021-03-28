@@ -20,8 +20,6 @@ import { store } from './store';
 
 const Stack = createStackNavigator();
 const App = () => {
-    const isDarkMode = useColorScheme() === 'dark';
-
     return (
         <Provider store={store}>
             <NavigationContainer>

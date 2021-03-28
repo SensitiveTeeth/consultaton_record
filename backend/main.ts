@@ -20,11 +20,11 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(cors({
-//     origin: [
-//         process.env.REACT_DOMAIN!
-//     ]
-// }))
+app.use(cors({
+    origin: [
+        process.env.REACT_NATIVE_DOMAIN!
+    ]
+}))
 
 declare global {
     namespace Express {

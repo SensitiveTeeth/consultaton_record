@@ -1,41 +1,22 @@
-import { combineReducers, createStore, compose, applyMiddleware } from "redux";
-import { RouterState, RouterAction, connectRouter, routerMiddleware } from "connected-react-router"
-import { createBrowserHistory } from 'history';
+import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk, { ThunkDispatch as OldThunkDispatch } from 'redux-thunk';
-import { AuthState, authReducer } from './redux/auth/reducer'
 import { AuthActions } from "./redux/auth/actions";
-
-export const history = createBrowserHistory();
+import { authReducer, AuthState } from "./redux/auth/reducer";
 
 export interface RootState {
-    auth: AuthState,
-    router: RouterState,
-
+    auth: AuthState;
 }
 
-export type RootActions = RouterAction | AuthActions;
+export type RootActions = AuthActions;
 
-const reducers = combineReducers<RootState>({
+const rootReducer = combineReducers({
     auth: authReducer,
-    router: connectRouter(history),
 })
 
+export type ThunkDispatch = OldThunkDispatch<RootState, null, RootActions>
 
+const composeEnhancers = (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-declare global {
-    /* tslint:disable:interface-name */
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any
-    }
-}
-
-export type ThunkDispatch = OldThunkDispatch<RootState, SVGFEGaussianBlurElement, RootActions>
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
-export const store = createStore(reducers, composeEnhancers(
+export const store = createStore<RootState, RootActions, {}, {}>(rootReducer, composeEnhancers(
     applyMiddleware(thunk),
-    applyMiddleware(routerMiddleware(history))
-
 ))
