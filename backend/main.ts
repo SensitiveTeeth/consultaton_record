@@ -3,12 +3,11 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import Knex from 'knex'
-// import { Bearer } from 'permit'
-// import { AuthController } from './controller/AuthController'
+import { Bearer } from 'permit'
+import { AuthController } from './controller/AuthController'
 import { ClientController } from './controller/ClientController'
-// import { createIsLoggedIn } from './guard'
-// // import { routes } from './routes'
-// import { AuthService } from './service/AuthService'
+import { createIsLoggedIn } from './guard'
+import { AuthService } from './service/AuthService'
 import { ClientService } from './service/ClientService'
 
 
@@ -37,22 +36,21 @@ declare global {
     }
 }
 
-// const authService = new AuthService(knex);
-// export const authController = new AuthController(authService);
+const authService = new AuthService(knex);
+export const authController = new AuthController(authService);
 const clientService = new ClientService(knex)
 export const clientController = new ClientController(clientService)
-// console.log(clientController)
 // TODO other services
 
 
 
-// const permit = new Bearer({
-//     query: "access_token"
-// })
+const permit = new Bearer({
+    query: "access_token"
+})
 
-// export const isLoggedIn = createIsLoggedIn(permit, authService)
-
-// app.use(routes);
+export const isLoggedIn = createIsLoggedIn(permit, authService)
+import { routes } from './routes'
+app.use(routes);
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {
