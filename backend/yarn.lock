@@ -1461,9 +1461,9 @@ node-modules-regexp@^1.0.0:
   integrity sha1-jZ2+KJZKSsVxLpExZCEHxx6Q7EA=
 
 node@^15.10.0:
-  version "15.10.0"
-  resolved "https://registry.yarnpkg.com/node/-/node-15.10.0.tgz#082a1e03cb4b58199d4b427b379dca6053193260"
-  integrity sha512-JboERsul33BpTDeth8SsGWg/gTZfNEWGMT5HVqIoyepRwAARznCjwdWvLHHd/A9bvAYFp5zaq46RnVArWz44kA==
+  version "15.12.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-15.12.0.tgz#54ae826759a5ae2366eca6c79511ff3c610281b8"
+  integrity sha512-0R4LdnFQzII7I04A2eY1d4TypvH6XhSMluRr477Zwz43jUWdM+bayWsLfgnkf1Cv4Tbl9MaTAjAIvGpC0+6gFQ==
   dependencies:
     node-bin-setup "^1.0.0"
 

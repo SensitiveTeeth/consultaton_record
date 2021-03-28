@@ -19,6 +19,9 @@ export const createIsLoggedIn = (permit: Bearer, authService: AuthService) => {
             const { hashed_password, ...userWithoutPassword } = user
             req.user = userWithoutPassword
             return next()
+        } catch (e) {
+            console.error(e)
+            return res.status(401).json({ error: "Permission Denied" })
         }
-
+    }
 }

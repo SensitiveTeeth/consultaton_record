@@ -5,18 +5,23 @@ import jwtSimple from 'jwt-simple'
 import jwt from "../jwt";
 
 export class AuthController {
-    public constructor(private authService: AuthService) {
+    public constructor(public authService: AuthService) {
     }
-    public ClientLogin = async (req: Request, res: Response) => {
+    ClientLogin = async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body
-            if (!email || !password) return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+            if (!email || !password) {
+                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+            }
 
             const user = await this.authService.getCurrentUser(email);
 
-            if (user == null) return res.status(400).json({ error: 'Incorrect UserCode or Password' })
-
-            if (!await checkPassword(password, user.hashed_password)) return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+            if (user == null) {
+                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+            }
+            if (!await checkPassword(password, user.hashed_password)) {
+                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+            }
             const payload = {
                 id: user.id
             };
@@ -24,8 +29,8 @@ export class AuthController {
             return res.json({
                 token: token
             })
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            console.error(err);
             return res.status(400).json({ error: 'Unknown error' })
         }
     }

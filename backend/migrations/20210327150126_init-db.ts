@@ -8,12 +8,14 @@ export async function up(knex: Knex): Promise<void> {
         table.string('email').unique();
         table.string('hashed_password');
         table.string('clinic_name');
-        table.integer('phone_number').;
+        table.integer('phone_number');
         table.string('address');
     });
     await knex.schema.createTable('consultation_record', (table) => {
         table.increments();
         table.timestamps(false, true);
+        table.integer("client_id").unsigned();
+        table.foreign("client_id").references('client.id')
         table.string('clinic')
         table.string('doctor_name')
         table.string('patient_name')
@@ -27,6 +29,7 @@ export async function up(knex: Knex): Promise<void> {
 
 }
 
-export async function down(knex: Knex): Promise<void> {
-    await knex.schema.dropTableIfExists('client');
+export async function down(knex: Knex) {
+    await knex.schema.dropTableIfExists('consultation_record')
+    await knex.schema.dropTableIfExists('client')
 }

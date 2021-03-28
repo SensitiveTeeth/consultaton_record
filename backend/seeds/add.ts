@@ -1,7 +1,7 @@
 import * as Knex from "knex";
 import { hashPassword } from "../hash";
 
-export async function seed(knex: Knex): Promise<void> {
+export async function seed(knex: Knex) {
     // Deletes ALL existing entries
     await knex("client").del();
 
