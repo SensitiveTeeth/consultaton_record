@@ -1,15 +1,15 @@
+import { Picker } from '@react-native-community/picker';
+import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
-import { Picker } from '@react-native-community/picker'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import config from '../config';
 import { IRecord } from '../model';
 import { RootState } from '../store';
-import moment from 'moment'
-import { useNavigation } from '@react-navigation/native';
 
 export default function Home() {
-    const [viewType, setViewType] = useState('daily')
+    const [viewType, setViewType] = useState<string>('daily')
     const token = useSelector((state: RootState) => state.auth.token)
     const client = useSelector((state: RootState) => state.auth.user)
     const [clientRecord, setClientRecord] = useState<IRecord[]>([])
@@ -29,7 +29,7 @@ export default function Home() {
         const json = await res.json()
         setClientRecord(json)
     }
-
+    console.log(viewType)
     useEffect(() => {
         fetchDate(viewType, client)
     }, [])
@@ -37,38 +37,56 @@ export default function Home() {
         return records.map(renderClientRecord)
     }
     const renderClientRecord = (record: IRecord) => (
-        <TouchableHighlight key={record.id} onPress={() => {
+        <TouchableOpacity key={record.id} onPress={() => {
             navigation.navigate('Record', { record: record })
         }}
         >
             <Text style={styles.label} >
-                {moment(record.consultation_date_and_time).format('YYYY-MM-DD hh:mm:ss')}
+                {viewType === 'daily' && 'date: ' +
+                    moment(record.consultation_date_and_time).format('YYYY-MM-DD')
+                }
+                {viewType === 'weekly' && 'week: ' +
+                    moment(record.consultation_date_and_time).format('W')
+                }
+                {viewType === 'monthly' && 'month: ' +
+                    moment(record.consultation_date_and_time).format('MMMM')
+                }
             </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
     return (
         <>
-            <View style={{ justifyContent: 'center' }}>
-                <Picker
-                    style={{ height: 200, width: 380, justifyContent: 'center' }}
-                    selectedValue={viewType}
-                    onValueChange={(itemValue: any, itemIndex: any) => setViewType(itemValue)}
-                >
-                    <Picker.Item label="daily" value="daily" />
-                    <Picker.Item label="weekly" value="weekly" />
-                    <Picker.Item label="monthly" value="monthly" />
-                </Picker>
-            </View>
-            <View>
-                <TouchableHighlight style={styles.button} onPress={() => {
-                    fetchDate(viewType, client)
-                }}>
+            <View style={{ flexDirection: 'row', marginTop: 50, justifyContent: 'center' }}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                        setViewType('daily')
+                    }}>
                     <Text>
-                        Submit
+                        Daily
                     </Text>
-                </TouchableHighlight>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                        setViewType('weekly')
+                    }}>
+                    <Text>
+                        Weekly
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                        setViewType('monthly')
+                    }}>
+                    <Text>
+                        Monthly
+                    </Text>
+                </TouchableOpacity>
             </View>
-            <View style={styles.container}>
+
+            <View style={{ justifyContent: 'center' }}>
                 <Text>
                     {render(clientRecord)}
                 </Text>
@@ -87,13 +105,17 @@ const styles = StyleSheet.create({
         fontSize: 25,
     },
     button: {
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#a2b5a0',
         margin: 10,
         marginTop: 25,
         borderRadius: 4,
         padding: 10,
+        width: 100,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+
     },
     container: {
         flex: 1,
