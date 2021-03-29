@@ -37,7 +37,8 @@ export class ClinicService {
             .into('consultation_record')
     }
 
-    async getClientIDByEmail(email: string) {
+    async getClientIDByEmail(smallCapEmail: string) {
+        const email = smallCapEmail.toUpperCase()
         const result = await this.knex
             .select('id')
             .from('client')

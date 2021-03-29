@@ -27,7 +27,8 @@ export class AuthController {
             };
             const token = jwtSimple.encode(payload, jwt.jwtSecret)
             return res.json({
-                token: token
+                token: token,
+                user: email
             })
         } catch (err) {
             console.error(err);

@@ -18,6 +18,16 @@ import Home from './pages/Home';
 import { Provider } from 'react-redux';
 import { store } from './store';
 
+const innerStack = createStackNavigator();
+function HomeStack() {
+    return (
+        <innerStack.Navigator>
+            <innerStack.Screen name="Home" component={Home} />
+            <innerStack.Screen name="Home" component={Home} />
+        </innerStack.Navigator>
+    )
+}
+
 const Stack = createStackNavigator();
 const App = () => {
     return (

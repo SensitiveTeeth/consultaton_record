@@ -21,3 +21,7 @@ routes.get('/user', isLoggedIn, authController.getCurrentUser);
 //an API for creating consultation record
 //need to login
 routes.post('/create_consultation_record', clinicController.clinicCreateRecord)
+
+//an API for getting consultation record
+//need to login
+routes.post('/get_client_consultation_record', clientController.getClientRecord)

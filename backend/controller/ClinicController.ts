@@ -9,7 +9,7 @@ export class ClinicController {
         try {
             return res.json(await this.clinicService.testingGetAllRecord())
         } catch (err) {
-            return res.status(500).json({ error: 'Internal service error' })
+            return res.status(500).json({ message: 'Internal service error' })
 
         }
     }

@@ -31,6 +31,7 @@ export class ClientService {
             })
             .into('client')
     }
+
     async getUserCountByEmail(email: string) {
         const result = await this.knex
             // .select('id')
@@ -40,5 +41,22 @@ export class ClientService {
             .first()
         const count = { ...result }
         return count["count(`id`)"]
+    }
+
+    async getClientIDByEmail(email: string) {
+        const result = await this.knex
+            .select('id')
+            .from('client')
+            .where('email', email)
+            .first()
+        return result.id
+    }
+
+    async GetClientDailyRecord(id: number) {
+        const result = await this.knex
+            .select('*')
+            .from('consultation_record')
+            .where('client_id', id)
+        return result
     }
 }

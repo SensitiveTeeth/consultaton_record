@@ -4,12 +4,13 @@ import moment from 'moment'
 
 export async function seed(knex: Knex) {
     // Deletes ALL existing entries
+    await knex("consultation_record").del();
     await knex("client").del();
 
     // Inserts seed entries
     const client1 = await knex("client").insert({
         email: 'testing1@email.com'.toUpperCase(),
-        hashed_password: await hashPassword('password1'),
+        hashed_password: await hashPassword('1'),
         clinic_name: 'clinic 1',
         phone_number: '11111111',
         address: 'testing address 1'
