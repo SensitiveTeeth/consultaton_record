@@ -1,4 +1,6 @@
 ## Development environment
+---This app only been tested on ios platform---
+
 IDE - vsCode@1.54.3
 
 MySQL Community Server@8.0.23
@@ -9,7 +11,7 @@ cocoapods@1.10.1
 
 node@12.16.1
 
-
+----
 ## Database(MYSQL)
 ## please update .env DB_NAME and DB_PASSWORD to your own setting
 
