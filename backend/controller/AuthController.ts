@@ -15,7 +15,6 @@ export class AuthController {
             if (!email || !password) {
                 return res.status(400).json({ message: 'Incorrect email or Password' })
             }
-
             const user = await this.authService.getUserByEmail(email);
             if (user == null || user == undefined) {
                 return res.status(400).json({ message: 'Incorrect email or Password' })

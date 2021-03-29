@@ -1,14 +1,26 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/auth/actions';
+import { RootState } from '../store';
 
 
 export default function Login(props: any) {
+    const dispatch = useDispatch()
     const { control, handleSubmit, errors } = useForm()
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+    const navigation = useNavigation();
+
     const onSubmit = (event: any) => {
-        console.log(event)
+        dispatch(login(event.email, event.password))
     }
-    console.log('error', errors)
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigation.navigate('Home')
+        }
+    }, [isAuthenticated, navigation])
     return (
         <View style={styles.container}>
             <View>
@@ -19,7 +31,7 @@ export default function Login(props: any) {
             <View>
                 <Text style={styles.label}>Email</Text>
                 <Controller
-                    name="Email"
+                    name="email"
                     defaultValue=""
                     control={control}
                     rules={{ required: 'This is required.' }}
@@ -37,7 +49,7 @@ export default function Login(props: any) {
             <View>
                 <Text style={styles.label}>Password</Text>
                 <Controller
-                    name="Password"
+                    name="password"
                     defaultValue=""
                     control={control}
                     rules={{ required: 'This is required.' }}

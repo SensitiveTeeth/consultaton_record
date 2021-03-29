@@ -11,7 +11,7 @@ export class AuthService {
                 'hashed_password'
             )
             .from('client')
-            .where('email', email)
+            .where('email', email.toUpperCase())
             .first()
         return result
         // return JSON.parse(JSON.stringify(result[0]))

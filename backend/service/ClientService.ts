@@ -13,16 +13,17 @@ export class ClientService {
     }
     //create account api
     async clientCreateAccount(
-        email: string,
+        smallCapEmail: string,
         password: string,
         clinic_name: string,
         phone_number: number,
         address: string,
     ) {
         const hashed_password = await hashPassword(password)
+        const Email = smallCapEmail.toUpperCase()
         await this.knex
             .insert({
-                email,
+                Email,
                 hashed_password,
                 clinic_name,
                 phone_number,
