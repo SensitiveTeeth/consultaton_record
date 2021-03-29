@@ -1,31 +1,35 @@
 import moment from 'moment';
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { IRecord } from '../model';
 
-export default function Record(props: IRecord) {
+export default function Record(record: any) {
+    // const result = [(record.route.params.record)]
+    // console.log(result)
     function render(singleRecord: any) {
         return singleRecord.map(renderClientRecord)
     }
     const renderClientRecord = (record: IRecord) => (
         <View key={record.id} >
             <Text style={styles.label} >
-                {moment(record.consultation_date_and_time).format('YYYY-MM-DD hh:mm:ss')}
+                Consultation date: {moment(record.consultation_date_and_time).format('YYYY-MM-DD')}
             </Text>
-            <Text> {record.clinic} </Text>
-            <Text> {record.doctor_name} </Text>
-            <Text> {record.patient_name} </Text>
-            <Text> {record.diagnosis} </Text>
-            <Text> {record.medication} </Text>
-            <Text> {record.consultation_fee} </Text>
-            <Text> {record.consultation_date_and_time} </Text>
-            <Text> {record.follow_up_consultation} </Text>
+            <Text style={styles.label} > Clinic name: {record.clinic} </Text>
+            <Text style={styles.label} > Doctor name: {record.doctor_name} </Text>
+            <Text style={styles.label} > Patient name: {record.patient_name} </Text>
+            <Text style={styles.label} > Diagnosis: {record.diagnosis} </Text>
+            <Text style={styles.label} > Medication: {record.medication} </Text>
+            <Text style={styles.label} > Consultation fee: {record.consultation_fee} </Text>
+            <Text style={styles.label} >
+                Consultation time: {moment(record.consultation_date_and_time).format('hh:mm:ss')}
+            </Text>
+            <Text style={styles.label} > Follow up Consultation: {record.follow_up_consultation} </Text>
         </View>
     )
     return (
         <View>
             <Text>
-                {render(props)}
+                {render([record.route.params.record])}
             </Text>
         </View>
     )

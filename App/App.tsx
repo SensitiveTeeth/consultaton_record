@@ -23,7 +23,9 @@ const innerStack = createStackNavigator();
 function HomeStack() {
     return (
         <innerStack.Navigator>
-            <innerStack.Screen name="Home" component={Home} />
+            <innerStack.Screen name="Home" component={Home} options={{
+                headerShown: false
+            }} />
             <innerStack.Screen name="Record" component={Record} />
         </innerStack.Navigator>
     )
@@ -39,7 +41,9 @@ const App = () => {
                         headerShown: false
                     }} />
                     <Stack.Screen name="CreateAccount" component={CreateAccount} />
-                    <Stack.Screen name="Home" component={HomeStack} />
+                    <Stack.Screen name="Home" component={HomeStack} options={{
+                        headerShown: false
+                    }} />
                     <Stack.Screen name="Loading" component={LoadingScreen} options={{
                         headerShown: false
                     }} />

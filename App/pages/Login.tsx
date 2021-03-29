@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
@@ -20,7 +20,9 @@ export default function Login(props: any) {
     }
     useEffect(() => {
         if (isAuthenticated) {
-            navigation.navigate('Home')
+            navigation.dispatch(
+                StackActions.replace('Home')
+            )
         }
     }, [isAuthenticated, navigation])
     return (

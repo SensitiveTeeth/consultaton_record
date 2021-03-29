@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { Picker } from '@react-native-community/picker'
 import { useSelector } from 'react-redux';
 import config from '../config';
-import { IRecord, initialRecord } from '../model';
+import { IRecord } from '../model';
 import { RootState } from '../store';
 import moment from 'moment'
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +12,8 @@ export default function Home() {
     const [viewType, setViewType] = useState('daily')
     const token = useSelector((state: RootState) => state.auth.token)
     const client = useSelector((state: RootState) => state.auth.user)
-    const [clientRecord, setClientRecord] = useState<IRecord>(initialRecord)
+    const [clientRecord, setClientRecord] = useState<IRecord[]>([])
+
     const navigation = useNavigation();
 
 
@@ -27,18 +28,17 @@ export default function Home() {
         })
         const json = await res.json()
         setClientRecord(json)
-        console.log(json)
     }
+
     useEffect(() => {
         fetchDate(viewType, client)
     }, [])
-
-    function render(clientRecord: any) {
-        return clientRecord.map(renderClientRecord)
+    function render(records: IRecord[]) {
+        return records.map(renderClientRecord)
     }
     const renderClientRecord = (record: IRecord) => (
         <TouchableHighlight key={record.id} onPress={() => {
-            navigation.navigate('Record', { props: { record } })
+            navigation.navigate('Record', { record: record })
         }}
         >
             <Text style={styles.label} >
@@ -69,7 +69,9 @@ export default function Home() {
                 </TouchableHighlight>
             </View>
             <View style={styles.container}>
-                {render(clientRecord)}
+                <Text>
+                    {render(clientRecord)}
+                </Text>
             </View>
         </>
     )
