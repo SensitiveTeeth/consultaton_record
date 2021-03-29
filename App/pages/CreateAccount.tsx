@@ -15,7 +15,7 @@ export default function Login() {
             <View>
                 <Text style={styles.label}>Email</Text>
                 <Controller
-                    name="Email"
+                    name="email"
                     defaultValue=""
                     control={control}
                     rules={{ required: 'This is required.' }}
@@ -33,7 +33,7 @@ export default function Login() {
             <View>
                 <Text style={styles.label}>Password</Text>
                 <Controller
-                    name="Password"
+                    name="password"
                     defaultValue=""
                     control={control}
                     rules={{ required: 'This is required.' }}

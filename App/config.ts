@@ -1,5 +1,5 @@
 const config = {
-    BACKEND_URL: 'http://localhost:3306'
+    BACKEND_URL: 'http://localhost:8000'
 }
 
 export default config

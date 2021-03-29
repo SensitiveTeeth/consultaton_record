@@ -64,11 +64,9 @@ export function login(email: string, password: string) {
             if (!json.token) {
                 return dispatch(loginFailed('Network error'));
             }
-            // const returnPath = (getState().router.location.state as any)?.from
 
             await AsyncStorage.setItem('token', json.token);
             dispatch(loginSuccess(json.token, json.user))
-            // dispatch(push(returnPath || '/followup'))
 
         } catch (e) {
             console.error(e);
@@ -77,7 +75,6 @@ export function login(email: string, password: string) {
 
     }
 }
-
 
 export function restoreLogin() {
     return async (dispatch: ThunkDispatch, getState: () => RootState) => {
