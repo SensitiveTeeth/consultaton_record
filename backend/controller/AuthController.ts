@@ -11,16 +11,15 @@ export class AuthController {
         try {
             const { email, password } = req.body
             if (!email || !password) {
-                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+                return res.status(400).json({ error: 'Incorrect email or Password' })
             }
 
             const user = await this.authService.getCurrentUser(email);
-
             if (user == null) {
-                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+                return res.status(400).json({ error: 'Incorrect email or Password' })
             }
             if (!await checkPassword(password, user.hashed_password)) {
-                return res.status(400).json({ error: 'Incorrect UserCode or Password' })
+                return res.status(400).json({ error: 'Incorrect email or Password' })
             }
             const payload = {
                 id: user.id
