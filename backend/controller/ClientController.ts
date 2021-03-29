@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { ClientService } from '../service/ClientService'
+// import moment from 'moment';
 
 export function removeTrim(object: Object) {
     for (let item in object) {
@@ -61,12 +62,22 @@ export class ClientController {
                 return res.status(400).json({ message: 'Invalid input' })
             }
             const clientID = await this.clientService.getClientIDByEmail(client)
-            if (viewType === 'daily') {
-                const result = await this.clientService.GetClientDailyRecord(clientID)
-                return res.json(result)
-            }
+            // if (viewType === 'daily') {
+            const result = await this.clientService.getClientRecord(clientID)
+            return res.json(result)
+            // }
+            // if (viewType === 'weekly') {
+            //     const result = await this.clientService.getClientWeeklyRecord(clientID)
+            //     const weekArray = []
+            //     for (let week of result) {
+            //         weekArray.push(moment(week.consultation_date_and_time).format('WW'))
+            //         console.log(week)
+            //     }
+            //     console.log(weekArray)
+            //     return res.json(weekArray)
+            // }
 
-            return
+            // return
         } catch (err) {
             console.log(err)
             return res.status(500).json({ message: 'Internal service error' })

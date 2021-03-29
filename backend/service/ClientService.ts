@@ -52,11 +52,18 @@ export class ClientService {
         return result.id
     }
 
-    async GetClientDailyRecord(id: number) {
+    async getClientRecord(id: number) {
         const result = await this.knex
             .select('*')
             .from('consultation_record')
             .where('client_id', id)
-        return result
+        return JSON.parse(JSON.stringify(result))
     }
+    // async getClientWeeklyRecord(id: number) {
+    //     const result = await this.knex
+    //         .select('consultation_date_and_time')
+    //         .from('consultation_record')
+    //         .where('client_id', id)
+    //     return JSON.parse(JSON.stringify(result))
+    // }
 }
