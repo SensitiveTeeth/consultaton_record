@@ -2,8 +2,8 @@ import Knex from 'knex';
 import { IUser } from '../model';
 
 export class AuthService {
-    constructor(private knex: Knex) { }
-    public async getCurrentUser(email: string) {
+    public constructor(private knex: Knex) { }
+    async getUserByEmail(email: string) {
         const result = await this.knex
             .select<IUser>(
                 'id',
@@ -12,10 +12,12 @@ export class AuthService {
             )
             .from('client')
             .where('email', email)
-        return JSON.parse(JSON.stringify(result[0]))
+            .first()
+        return result
+        // return JSON.parse(JSON.stringify(result[0]))
 
     }
-    public async getCurrentUserById(id: number) {
+    async getCurrentUserById(id: number) {
         const result = await this.knex
             .select<IUser>(
                 'id',
@@ -24,7 +26,9 @@ export class AuthService {
             )
             .from('client')
             .where('id', id)
-        return JSON.parse(JSON.stringify(result[0]))
+            .first()
+        return result
+        // return JSON.parse(JSON.stringify(result[0]))
 
     }
 }

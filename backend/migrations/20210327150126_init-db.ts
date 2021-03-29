@@ -21,7 +21,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('patient_name')
         table.string('diagnosis')
         table.string('medication')
-        table.string('consultation fee')
+        table.string('consultation_fee')
         table.string('follow_up_consultation')
         table.dateTime('consultation_date_and_time');
 

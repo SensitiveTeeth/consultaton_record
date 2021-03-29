@@ -14,8 +14,8 @@ export class AuthController {
                 return res.status(400).json({ error: 'Incorrect email or Password' })
             }
 
-            const user = await this.authService.getCurrentUser(email);
-            if (user == null) {
+            const user = await this.authService.getUserByEmail(email);
+            if (user == null || user == undefined) {
                 return res.status(400).json({ error: 'Incorrect email or Password' })
             }
             if (!await checkPassword(password, user.hashed_password)) {
@@ -32,5 +32,8 @@ export class AuthController {
             console.error(err);
             return res.status(400).json({ error: 'Unknown error' })
         }
+    }
+    async getCurrentUser(req: Request, res: Response) {
+        return res.json(req.user)
     }
 }
