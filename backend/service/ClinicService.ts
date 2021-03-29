@@ -3,7 +3,7 @@ import Knex from "knex";
 export class ClinicService {
     public constructor(private knex: Knex) { }
 
-    async testingGetAllRecord() {
+    async getAllRecord() {
         return await this.knex
             .select(
                 '*'

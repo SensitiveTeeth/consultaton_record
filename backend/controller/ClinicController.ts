@@ -5,9 +5,9 @@ import { removeTrim } from './ClientController'
 export class ClinicController {
     public constructor(private clinicService: ClinicService) {
     }
-    testingGetAllRecord = async (req: Request, res: Response) => {
+    getAllRecord = async (req: Request, res: Response) => {
         try {
-            return res.json(await this.clinicService.testingGetAllRecord())
+            return res.json(await this.clinicService.getAllRecord())
         } catch (err) {
             return res.status(500).json({ message: 'Internal service error' })
 
