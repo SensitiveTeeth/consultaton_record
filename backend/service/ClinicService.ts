@@ -19,7 +19,7 @@ export class ClinicService {
         diagnosis: string,
         medication: string,
         consultation_fee: string,
-        follow_up_consultation: boolean,
+        follow_up_consultation: string,
         consultation_date_and_time: string,
     ) {
         await this.knex
@@ -36,11 +36,21 @@ export class ClinicService {
             })
             .into('consultation_record')
     }
+
     async getClientIDByEmail(email: string) {
         const result = await this.knex
             .select('id')
             .from('client')
             .where('email', email)
+            .first()
+        return result
+    }
+
+    async getClinicAllRecord(clinic: string) {
+        const result = await this.knex
+            .select('*')
+            .from('consultation_record')
+            .where('clinic', clinic)
             .first()
         return result
     }
