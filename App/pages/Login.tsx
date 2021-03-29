@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,9 @@ export default function Login(props: any) {
     const dispatch = useDispatch()
     const { control, handleSubmit, errors } = useForm()
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+    const loginError = useSelector((state: RootState) => state.auth.message)
     const navigation = useNavigation();
+
 
     const onSubmit = (event: any) => {
         dispatch(login(event.email, event.password))
@@ -29,6 +31,11 @@ export default function Login(props: any) {
                 </Text>
             </View>
             <View>
+                {loginError && <View style={{ justifyContent: 'center' }}>
+                    <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 20 }}>
+                        {loginError}
+                    </Text>
+                </View>}
                 <Text style={styles.label}>Email</Text>
                 <Controller
                     name="email"

@@ -5,14 +5,14 @@ export interface AuthState {
     isAuthenticated: Boolean | null;
     token: string | null;
     user: User | null;
-    error: string | null
+    message: string | null
 }
 
 const initialState: AuthState = {
     isAuthenticated: null,
     token: null,
     user: null,
-    error: null
+    message: null
 }
 
 export function authReducer(state: AuthState = initialState, action: AuthActions): AuthState {
@@ -30,12 +30,12 @@ export function authReducer(state: AuthState = initialState, action: AuthActions
                 isAuthenticated: false,
                 token: null,
                 user: null,
-                error: action.error
+                message: action.message
             }
         case '@@auth/CLEAR_ERROR':
             return {
                 ...state,
-                error: null,
+                message: null,
             }
 
         case '@@auth/LOGOUT':

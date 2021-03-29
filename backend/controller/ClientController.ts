@@ -55,7 +55,6 @@ export class ClientController {
 
     getClientRecord = async (req: Request, res: Response) => {
         try {
-            console.log(req.body)
             req.body = removeTrim(req.body)
             const { viewType, client } = req.body
             if (!viewType || !client) {
@@ -64,7 +63,6 @@ export class ClientController {
             const clientID = await this.clientService.getClientIDByEmail(client)
             if (viewType === 'daily') {
                 const result = await this.clientService.GetClientDailyRecord(clientID)
-                console.log(result)
                 return res.json(result)
             }
 

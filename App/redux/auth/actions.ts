@@ -16,10 +16,10 @@ export function loginSuccess(token: string, user: User) {
     }
 }
 
-export function loginFailed(error: string) {
+export function loginFailed(message: string) {
     return {
         type: '@@auth/LOGIN_FAILED' as '@@auth/LOGIN_FAILED',
-        error
+        message
     }
 }
 export function clearError() {
@@ -59,7 +59,7 @@ export function login(email: string, password: string) {
             })
             const json = await res.json();
             if (res.status !== 200) {
-                return dispatch(loginFailed(json.error));
+                return dispatch(loginFailed(json.message));
             }
             if (!json.token) {
                 return dispatch(loginFailed('Network error'));

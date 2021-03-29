@@ -17,13 +17,14 @@ import LoadingScreen from './pages/LoadingScreen'
 import Home from './pages/Home';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import Record from './pages/Record';
 
 const innerStack = createStackNavigator();
 function HomeStack() {
     return (
         <innerStack.Navigator>
             <innerStack.Screen name="Home" component={Home} />
-            <innerStack.Screen name="Home" component={Home} />
+            <innerStack.Screen name="Record" component={Record} />
         </innerStack.Navigator>
     )
 }
@@ -38,7 +39,7 @@ const App = () => {
                         headerShown: false
                     }} />
                     <Stack.Screen name="CreateAccount" component={CreateAccount} />
-                    <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="Home" component={HomeStack} />
                     <Stack.Screen name="Loading" component={LoadingScreen} options={{
                         headerShown: false
                     }} />

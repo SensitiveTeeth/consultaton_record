@@ -9,7 +9,7 @@ export async function seed(knex: Knex) {
 
     // Inserts seed entries
     const client1 = await knex("client").insert({
-        email: 'testing1@email.com'.toUpperCase(),
+        email: 'test1'.toUpperCase(),
         hashed_password: await hashPassword('1'),
         clinic_name: 'clinic 1',
         phone_number: '11111111',
