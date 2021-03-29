@@ -17,8 +17,8 @@ export class ClientController {
         try {
             return res.json(await this.clientService.testingGetAllUser())
         } catch (err) {
+            console.log(err)
             return res.status(500).json({ error: 'Internal service error' })
-
         }
     }
     clientCreateAccount = async (req: Request, res: Response) => {
@@ -45,26 +45,11 @@ export class ClientController {
                 return res.status(400).json({ message: 'Email already exist' })
             }
             await this.clientService.clientCreateAccount(email, password, clinic_name, phone_number, address)
-            return res.status(200).json({ message: 'Success' })
+            return res.status(200).json({ message: 'Create account success' })
 
         } catch (err) {
             console.log(err)
-            return res.status(500).json({ error: 'Internal service error' })
+            return res.status(500).json({ message: 'Internal service error' })
         }
     }
-    // getUserCountByEmail = async (req: Request, res: Response) => {
-    //     try {
-    //         let { email } = req.body
-    //         if (!email) {
-    //             return res.status(500).json({ error: 'Invalid input' })
-    //         }
-    //         email = email.trim()
-    //         const result = await this.clientService.getUserCountByEmail(email)
-    //         return res.json(result)
-    //     } catch (err) {
-    //         console.log(err)
-    //         return res.status(500).json({ error: 'Internal service error' })
-
-    //     }
-    // }
 }

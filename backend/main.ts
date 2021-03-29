@@ -4,11 +4,13 @@ import dotenv from 'dotenv'
 import express from 'express'
 import Knex from 'knex'
 import { Bearer } from 'permit'
+import { createIsLoggedIn } from './guard'
 import { AuthController } from './controller/AuthController'
 import { ClientController } from './controller/ClientController'
-import { createIsLoggedIn } from './guard'
 import { AuthService } from './service/AuthService'
 import { ClientService } from './service/ClientService'
+import { ClinicService } from './service/ClinicService'
+import { ClinicController } from './controller/ClinicController'
 
 
 dotenv.config()
@@ -38,8 +40,12 @@ declare global {
 
 const authService = new AuthService(knex);
 export const authController = new AuthController(authService);
+
 const clientService = new ClientService(knex)
 export const clientController = new ClientController(clientService)
+
+const clinicService = new ClinicService(knex)
+export const clinicController = new ClinicController(clinicService)
 // TODO other services
 
 
@@ -50,6 +56,7 @@ const permit = new Bearer({
 
 export const isLoggedIn = createIsLoggedIn(permit, authService)
 import { routes } from './routes'
+
 app.use(routes);
 
 const PORT = process.env.PORT || 8000
