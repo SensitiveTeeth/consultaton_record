@@ -23,7 +23,6 @@ export async function up(knex: Knex): Promise<void> {
         table.string('medication')
         table.string('consultation_fee')
         table.string('follow_up_consultation')
-        table.string('has_follow_up_consultation')
         table.dateTime('consultation_date_and_time');
 
     });

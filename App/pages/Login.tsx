@@ -45,6 +45,8 @@ export default function Login(props: any) {
                         />
                     )}
                 />
+                {errors.email && <Text>{errors.email?.message}</Text>}
+
             </View>
             <View>
                 <Text style={styles.label}>Password</Text>
@@ -64,6 +66,7 @@ export default function Login(props: any) {
                         />
                     )}
                 />
+                {errors.password && <Text>{errors.password?.message}</Text>}
             </View>
             <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
                 <Text>
