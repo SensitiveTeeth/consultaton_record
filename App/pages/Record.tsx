@@ -4,8 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { IRecord } from '../model';
 
 export default function Record(record: any) {
-    // const result = [(record.route.params.record)]
-    // console.log(result)
     function render(singleRecord: any) {
         return singleRecord.map(renderClientRecord)
     }

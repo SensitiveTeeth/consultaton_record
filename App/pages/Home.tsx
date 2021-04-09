@@ -29,7 +29,6 @@ export default function Home() {
         const json = await res.json()
         setClientRecord(json)
     }
-    console.log(viewType)
     useEffect(() => {
         fetchDate(viewType, client)
     }, [])

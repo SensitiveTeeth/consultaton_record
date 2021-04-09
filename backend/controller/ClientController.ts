@@ -18,7 +18,7 @@ export class ClientController {
         try {
             return res.json(await this.clientService.testingGetAllUser())
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return res.status(500).json({ message: 'Internal service error' })
         }
     }
@@ -49,7 +49,7 @@ export class ClientController {
             return res.status(200).json({ message: 'Create account success' })
 
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return res.status(500).json({ message: 'Internal service error' })
         }
     }
@@ -66,7 +66,7 @@ export class ClientController {
             return res.json(result)
 
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return res.status(500).json({ message: 'Internal service error' })
         }
     }
