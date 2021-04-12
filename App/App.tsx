@@ -16,7 +16,7 @@ import Login from './pages/Login';
 import LoadingScreen from './pages/LoadingScreen'
 import Home from './pages/Home';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store } from './Store';
 import Record from './pages/Record';
 
 const innerStack = createStackNavigator();
