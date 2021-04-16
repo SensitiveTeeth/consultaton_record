@@ -1,4 +1,4 @@
-import { ThunkDispatch, RootState } from "../../store"
+import { ThunkDispatch, RootState } from "../../Store"
 import config from '../../config'
 import AsyncStorage from "@react-native-community/async-storage"
 

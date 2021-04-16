@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { restoreLogin } from '../redux/auth/actions';
-import { RootState } from '../store';
+import { RootState } from '../Store';
 
 export default function LoadingScreen() {
     const dispatch = useDispatch()

@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/auth/actions';
-import { RootState } from '../store';
+import { RootState } from '../Store';
 
 
 export default function Login(props: any) {

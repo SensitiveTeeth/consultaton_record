@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import config from '../config';
-import { RootState } from '../store';
+import { RootState } from '../Store';
 
 
 export default function Login() {

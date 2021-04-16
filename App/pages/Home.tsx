@@ -6,7 +6,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import config from '../config';
 import { IRecord } from '../model';
-import { RootState } from '../store';
+import { RootState } from '../Store';
 
 export default function Home() {
     const [viewType, setViewType] = useState<string>('daily')
